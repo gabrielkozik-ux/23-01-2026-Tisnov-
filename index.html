@@ -55,7 +55,7 @@
             overflow: hidden;
         }
         .details-content.open {
-            max-height: 1000px; /* Arbitrary large height */
+            max-height: 1000px; 
             opacity: 1;
         }
         
@@ -291,10 +291,14 @@
                 <div id="acc-court" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4">
                         <p class="text-sm italic mb-3">"Takový špíny by se měly střílet. Vím, do jakýho fitka chodíš. 🔫💀"</p>
+                        
                         <div class="bg-black/40 p-3 rounded text-center">
-                            <span class="text-red-500 font-extrabold text-lg tracking-widest">VERDIKT: VINEN</span>
-                            <p class="text-xs text-slate-200 mt-1">Nebezpečné vyhrožování (§ 353). Podmínka + Záznam.</p>
+                            <span id="secret-verdict" class="text-red-500 font-extrabold text-lg tracking-widest transition-all duration-300">VERDIKT: ???</span>
+                            <p id="secret-explanation" class="text-xs text-slate-200 mt-1 blur-sm select-none transition-all duration-500">
+                                Rozhodni ty! (Čekej na odhalení)
+                            </p>
                         </div>
+
                         <p class="text-xs text-slate-300 mt-3 text-center">Svoboda slova končí tam, kde začíná strach o život.</p>
                     </div>
                 </div>
@@ -317,11 +321,12 @@
                     >
                 </div>
             </div>
+
             <p class="text-slate-200 text-sm mb-4">Právo přeje bdělým. Neřeš to, až když zvoní exekutor.</p>
             <a href="#" class="inline-block px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full border border-slate-600 transition text-sm">
                 <i class="fas fa-envelope mr-2"></i> kozik@iustoria.cz
             </a>
-            <p class="text-xs text-slate-400 mt-8">© 2026 IUSTORIA Advokátní kancelář | Tišnov, Brno/p>
+            <p class="text-xs text-slate-400 mt-8">© 2026 IUSTORIA Advokátní kancelář | Tišnov, Brno</p>
         </div>
     </footer>
 
@@ -333,26 +338,21 @@
             const contentCriminal = document.getElementById('content-criminal');
 
             if (tab === 'civil') {
-                // Style Buttons
-                // HIGH CONTRAST MOD: text-slate-400 -> text-slate-200
                 btnCivil.classList.remove('text-slate-200', 'hover:text-white');
                 btnCivil.classList.add('bg-cyan-600', 'text-white', 'shadow-lg');
                 
                 btnCriminal.classList.add('text-slate-200', 'hover:text-white');
                 btnCriminal.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
 
-                // Toggle Content
                 contentCivil.classList.remove('hidden');
                 contentCriminal.classList.add('hidden');
             } else {
-                // Style Buttons
                 btnCivil.classList.add('text-slate-200', 'hover:text-white');
                 btnCivil.classList.remove('bg-cyan-600', 'text-white', 'shadow-lg');
 
                 btnCriminal.classList.remove('text-slate-200', 'hover:text-white');
                 btnCriminal.classList.add('bg-red-600', 'text-white', 'shadow-lg');
 
-                // Toggle Content
                 contentCivil.classList.add('hidden');
                 contentCriminal.classList.remove('hidden');
             }
@@ -365,8 +365,31 @@
             content.classList.toggle('open');
             icon.classList.toggle('open');
         }
+
+        // SECRET KEY LISTENER (Press 'X' to reveal verdict)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'x' || event.key === 'X') {
+                const verdictElement = document.getElementById('secret-verdict');
+                const explanation = document.getElementById('secret-explanation');
+                
+                if (verdictElement && explanation) {
+                    if (verdictElement.innerHTML.includes("???")) {
+                        // ODHALENÍ
+                        verdictElement.innerHTML = "VERDIKT: VINEN";
+                        verdictElement.classList.add("scale-125");
+                        setTimeout(() => verdictElement.classList.remove("scale-125"), 300);
+
+                        explanation.innerHTML = "Nebezpečné vyhrožování (§ 353). Podmínka + Záznam.";
+                        explanation.classList.remove("blur-sm");
+                    } else {
+                        // SKRYTÍ (Reset)
+                        verdictElement.innerHTML = "VERDIKT: ???";
+                        explanation.innerHTML = "Rozhodni ty! (Čekej na odhalení)";
+                        explanation.classList.add("blur-sm");
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
-
-
