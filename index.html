@@ -69,7 +69,6 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Header / Hero Section -->
     <header class="relative overflow-hidden bg-slate-900 py-12 px-4 text-center border-b border-slate-800">
         <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
             <div class="absolute right-10 top-10 w-64 h-64 bg-blue-500 rounded-full blur-3xl"></div>
@@ -83,39 +82,35 @@
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-2 text-white">
                 PRÁVO PRO <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">PŘEŽITÍ</span>
             </h1>
-            <p class="text-slate-400 text-lg md:text-xl mt-4 max-w-2xl mx-auto">
+            <p class="text-slate-200 text-lg md:text-xl mt-4 max-w-2xl mx-auto">
                 Maturitní speciál: Jak neskončit v exekuci, v base nebo s ostudou na internetu.
             </p>
             <div class="mt-6 flex justify-center gap-4">
-                <span class="text-sm text-slate-500 flex items-center gap-2">
+                <span class="text-sm text-slate-300 flex items-center gap-2">
                     <i class="fas fa-user-tie text-cyan-500"></i> Gabriel Kožík
                 </span>
-                <span class="text-sm text-slate-500 flex items-center gap-2">
+                <span class="text-sm text-slate-300 flex items-center gap-2">
                     <i class="fas fa-map-marker-alt text-red-500"></i> Tišnov / IUSTORIA
                 </span>
             </div>
         </div>
     </header>
 
-    <!-- Navigation / Switcher -->
     <nav class="flex justify-center -mt-6 z-20 px-4">
         <div class="bg-slate-800 p-1 rounded-xl shadow-2xl flex w-full max-w-lg border border-slate-700">
             <button onclick="switchTab('civil')" id="btn-civil" class="flex-1 py-3 rounded-lg text-sm md:text-base font-bold transition-all duration-300 bg-cyan-600 text-white shadow-lg flex items-center justify-center gap-2">
                 <i class="fas fa-money-bill-wave"></i> 1. Peníze & Byznys
             </button>
-            <button onclick="switchTab('criminal')" id="btn-criminal" class="flex-1 py-3 rounded-lg text-sm md:text-base font-bold transition-all duration-300 text-slate-400 hover:text-white flex items-center justify-center gap-2">
+            <button onclick="switchTab('criminal')" id="btn-criminal" class="flex-1 py-3 rounded-lg text-sm md:text-base font-bold transition-all duration-300 text-slate-200 hover:text-white flex items-center justify-center gap-2">
                 <i class="fas fa-handcuffs"></i> 2. Zločin & Trest
             </button>
         </div>
     </nav>
 
-    <!-- Main Content Area -->
     <main class="flex-grow container mx-auto px-4 py-12 max-w-4xl">
 
-        <!-- SECTION 1: CIVIL & BUSINESS -->
         <div id="content-civil" class="fade-in space-y-6">
             
-            <!-- Block 1: Work -->
             <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-work')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
@@ -124,12 +119,12 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">Faktura vs. Smlouva</h3>
-                            <p class="text-slate-400 text-sm">Hra o peníze a Švarcsystém</p>
+                            <p class="text-slate-200 text-sm">Hra o peníze a Švarcsystém</p>
                         </div>
                     </div>
-                    <i id="icon-acc-work" class="fas fa-chevron-down text-slate-500 rotate-icon"></i>
+                    <i id="icon-acc-work" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
-                <div id="acc-work" class="details-content px-6 pb-6 text-slate-300 border-t border-slate-700/50">
+                <div id="acc-work" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-4">
                         <div class="grid md:grid-cols-2 gap-4">
                             <div class="bg-slate-900 p-4 rounded-lg border-l-4 border-green-500">
@@ -157,7 +152,6 @@
                 </div>
             </div>
 
-            <!-- Block 2: Housing -->
             <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-house')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
@@ -166,15 +160,15 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">Past spolubydlení</h3>
-                            <p class="text-slate-400 text-sm">Jeden podpis vládne všem</p>
+                            <p class="text-slate-200 text-sm">Jeden podpis vládne všem</p>
                         </div>
                     </div>
-                    <i id="icon-acc-house" class="fas fa-chevron-down text-slate-500 rotate-icon"></i>
+                    <i id="icon-acc-house" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
-                <div id="acc-house" class="details-content px-6 pb-6 text-slate-300 border-t border-slate-700/50">
+                <div id="acc-house" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-3">
                         <p>Když podepíšeš nájemní smlouvu na byt v Brně pro 6 lidí jen TY, dlužíš majiteli peníze jen TY.</p>
-                        <ul class="list-disc list-inside text-sm space-y-1 text-slate-400">
+                        <ul class="list-disc list-inside text-sm space-y-1 text-slate-200">
                             <li>Když kamarád nezaplatí, exekutor jde po tobě.</li>
                             <li>Od 18 let jsi plně svéprávný/á. Rodiče nejsou tvůj štít.</li>
                         </ul>
@@ -185,7 +179,6 @@
                 </div>
             </div>
 
-            <!-- Block 3: AI -->
             <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-ai')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
@@ -194,12 +187,12 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">AI & Byznys</h3>
-                            <p class="text-slate-400 text-sm">Midjourney, Copyright a Deepfakes</p>
+                            <p class="text-slate-200 text-sm">Midjourney, Copyright a Deepfakes</p>
                         </div>
                     </div>
-                    <i id="icon-acc-ai" class="fas fa-chevron-down text-slate-500 rotate-icon"></i>
+                    <i id="icon-acc-ai" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
-                <div id="acc-ai" class="details-content px-6 pb-6 text-slate-300 border-t border-slate-700/50">
+                <div id="acc-ai" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-3">
                         <div class="flex flex-col gap-2 text-sm">
                             <p><i class="fas fa-check text-green-500 mr-2"></i> <strong>Autorem je člověk:</strong> Co vytvoří AI, je Public Domain (volné dílo). Kdokoliv to může zkopírovat.</p>
@@ -211,10 +204,8 @@
             </div>
         </div>
 
-        <!-- SECTION 2: CRIMINAL & POLICE -->
         <div id="content-criminal" class="hidden fade-in space-y-6">
             
-            <!-- Block 1: Police -->
             <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-police')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
@@ -223,40 +214,39 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">Styk s policií</h3>
-                            <p class="text-slate-400 text-sm">Street Law: Co dělat, když houkají majáky</p>
+                            <p class="text-slate-200 text-sm">Street Law: Co dělat, když houkají majáky</p>
                         </div>
                     </div>
-                    <i id="icon-acc-police" class="fas fa-chevron-down text-slate-500 rotate-icon"></i>
+                    <i id="icon-acc-police" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
-                <div id="acc-police" class="details-content px-6 pb-6 text-slate-300 border-t border-slate-700/50">
+                <div id="acc-police" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-center">
                             <div class="bg-slate-900 p-3 rounded border border-slate-700">
                                 <i class="fas fa-id-card text-2xl mb-2 text-blue-400"></i>
                                 <p class="text-xs font-bold uppercase">Legitimace</p>
-                                <p class="text-xs text-slate-500">Občanku/Appku ukázat musíš.</p>
+                                <p class="text-xs text-slate-300">Občanku/Appku ukázat musíš.</p>
                             </div>
                             <div class="bg-slate-900 p-3 rounded border border-slate-700">
                                 <i class="fas fa-video text-2xl mb-2 text-blue-400"></i>
                                 <p class="text-xs font-bold uppercase">Natáčení</p>
-                                <p class="text-xs text-slate-500">Ano, můžeš. Nestrkej mobil do obličeje.</p>
+                                <p class="text-xs text-slate-300">Ano, můžeš. Nestrkej mobil do obličeje.</p>
                             </div>
                             <div class="bg-slate-900 p-3 rounded border border-slate-700">
                                 <i class="fas fa-flask text-2xl mb-2 text-red-400"></i>
                                 <p class="text-xs font-bold uppercase">Dechová zkouška</p>
-                                <p class="text-xs text-slate-500">Řidič nesmí odmítnout!</p>
+                                <p class="text-xs text-slate-300">Řidič nesmí odmítnout!</p>
                             </div>
                         </div>
                         <div class="bg-red-900/20 p-4 rounded border border-red-500/50 text-center">
                             <h4 class="text-red-400 font-bold uppercase text-sm mb-2">Zlaté pravidlo advokáta</h4>
                             <p class="italic text-white text-lg">"Odepírám výpověď."</p>
-                            <p class="text-xs text-slate-400 mt-2">Není to drzost. Je to tvoje Ústavní právo. Nesnaž se z toho "vykecat".</p>
+                            <p class="text-xs text-slate-200 mt-2">Není to drzost. Je to tvoje Ústavní právo. Nesnaž se z toho "vykecat".</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Block 2: Nudes -->
             <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-nudes')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
@@ -265,18 +255,18 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">Sex, Lži a Screenshoty</h3>
-                            <p class="text-slate-400 text-sm">Past jménem "Méně než 18"</p>
+                            <p class="text-slate-200 text-sm">Past jménem "Méně než 18"</p>
                         </div>
                     </div>
-                    <i id="icon-acc-nudes" class="fas fa-chevron-down text-slate-500 rotate-icon"></i>
+                    <i id="icon-acc-nudes" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
-                <div id="acc-nudes" class="details-content px-6 pb-6 text-slate-300 border-t border-slate-700/50">
+                <div id="acc-nudes" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-3">
                          <div class="bg-slate-900 p-4 rounded border-l-4 border-purple-500">
                             <h4 class="font-bold text-purple-400">Rovnice průšvihu:</h4>
                             <p class="text-sm mt-1">Ty (19 let) + Partnerka (17 let) + Nudes v mobilu = <strong class="text-white">Dětská pornografie</strong>.</p>
                          </div>
-                         <ul class="list-disc list-inside text-sm space-y-2 text-slate-400">
+                         <ul class="list-disc list-inside text-sm space-y-2 text-slate-200">
                             <li><strong>Přeposlání fotky:</strong> Trestný čin (Šíření). Záznam v rejstříku. Konec kariéry.</li>
                             <li><strong>Revenge Porn:</strong> Pomsta po rozchodu tě bude stát podmínku a 150 000 Kč odškodného.</li>
                             <li><strong>Nudify AI:</strong> I fake fotka je trestná (poškození cizích práv).</li>
@@ -285,7 +275,6 @@
                 </div>
             </div>
 
-            <!-- Block 3: Court -->
             <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-court')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
@@ -294,19 +283,19 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">Gamifikace: Soudní síň</h3>
-                            <p class="text-slate-400 text-sm">Kdy je "sranda" trestný čin?</p>
+                            <p class="text-slate-200 text-sm">Kdy je "sranda" trestný čin?</p>
                         </div>
                     </div>
-                    <i id="icon-acc-court" class="fas fa-chevron-down text-slate-500 rotate-icon"></i>
+                    <i id="icon-acc-court" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
-                <div id="acc-court" class="details-content px-6 pb-6 text-slate-300 border-t border-slate-700/50">
+                <div id="acc-court" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4">
                         <p class="text-sm italic mb-3">"Takový špíny by se měly střílet. Vím, do jakýho fitka chodíš. 🔫💀"</p>
                         <div class="bg-black/40 p-3 rounded text-center">
                             <span class="text-red-500 font-extrabold text-lg tracking-widest">VERDIKT: VINEN</span>
-                            <p class="text-xs text-slate-400 mt-1">Nebezpečné vyhrožování (§ 353). Podmínka + Záznam.</p>
+                            <p class="text-xs text-slate-200 mt-1">Nebezpečné vyhrožování (§ 353). Podmínka + Záznam.</p>
                         </div>
-                        <p class="text-xs text-slate-500 mt-3 text-center">Svoboda slova končí tam, kde začíná strach o život.</p>
+                        <p class="text-xs text-slate-300 mt-3 text-center">Svoboda slova končí tam, kde začíná strach o život.</p>
                     </div>
                 </div>
             </div>
@@ -314,22 +303,25 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-auto">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-2xl font-bold text-white mb-4">Máš problém?</h2>
+            
             <div class="flex justify-center mb-6">
-                <!-- Placeholder for QR Code -->
-                <div class="w-32 h-32 bg-white p-2 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-qrcode text-6xl text-slate-900"></i>
-                    <!-- Replace icon with real img tag later -->
+                <div class="w-32 h-32 bg-white p-2 rounded-lg flex items-center justify-center overflow-hidden shadow-lg shadow-cyan-500/20">
+                    <img 
+                        src="QR_code.png" 
+                        alt="Naskenuj pro kontakt" 
+                        class="w-full h-full object-contain"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-exclamation-circle text-red-500 text-4xl\'></i>'"
+                    >
                 </div>
             </div>
-            <p class="text-slate-400 text-sm mb-4">Právo přeje bdělým. Neřeš to, až když zvoní exekutor.</p>
+            <p class="text-slate-200 text-sm mb-4">Právo přeje bdělým. Neřeš to, až když zvoní exekutor.</p>
             <a href="#" class="inline-block px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full border border-slate-600 transition text-sm">
                 <i class="fas fa-envelope mr-2"></i> info@iustoria.cz
             </a>
-            <p class="text-xs text-slate-600 mt-8">© 2026 IUSTORIA Advokátní kancelář | Tišnov</p>
+            <p class="text-xs text-slate-400 mt-8">© 2026 IUSTORIA Advokátní kancelář | Tišnov</p>
         </div>
     </footer>
 
@@ -342,10 +334,11 @@
 
             if (tab === 'civil') {
                 // Style Buttons
-                btnCivil.classList.remove('text-slate-400', 'hover:text-white');
+                // HIGH CONTRAST MOD: text-slate-400 -> text-slate-200
+                btnCivil.classList.remove('text-slate-200', 'hover:text-white');
                 btnCivil.classList.add('bg-cyan-600', 'text-white', 'shadow-lg');
                 
-                btnCriminal.classList.add('text-slate-400', 'hover:text-white');
+                btnCriminal.classList.add('text-slate-200', 'hover:text-white');
                 btnCriminal.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
 
                 // Toggle Content
@@ -353,10 +346,10 @@
                 contentCriminal.classList.add('hidden');
             } else {
                 // Style Buttons
-                btnCivil.classList.add('text-slate-400', 'hover:text-white');
+                btnCivil.classList.add('text-slate-200', 'hover:text-white');
                 btnCivil.classList.remove('bg-cyan-600', 'text-white', 'shadow-lg');
 
-                btnCriminal.classList.remove('text-slate-400', 'hover:text-white');
+                btnCriminal.classList.remove('text-slate-200', 'hover:text-white');
                 btnCriminal.classList.add('bg-red-600', 'text-white', 'shadow-lg');
 
                 // Toggle Content
@@ -369,23 +362,9 @@
             const content = document.getElementById(id);
             const icon = document.getElementById('icon-' + id);
             
-            // Close all others in the same section (optional behavior)
-            // Uncomment if you want only one open at a time:
-            /*
-            document.querySelectorAll('.details-content').forEach(el => {
-                if(el.id !== id && el.classList.contains('open')) {
-                    el.classList.remove('open');
-                    // reset icons
-                    const otherIcon = document.getElementById('icon-' + el.id);
-                    if(otherIcon) otherIcon.classList.remove('open');
-                }
-            });
-            */
-
             content.classList.toggle('open');
             icon.classList.toggle('open');
         }
     </script>
 </body>
-
 </html>
