@@ -908,9 +908,9 @@
             secretTitle.classList.remove('scale-95', 'opacity-80', 'transition-all');
         }
 
-        // Touch eventy (Mobily)
-        secretTitle.addEventListener('touchstart', (e) => { e.preventDefault(); startPress(); });
-        secretTitle.addEventListener('touchend', (e) => { e.preventDefault(); releasePress(); });
+        // Touch eventy (Mobily) - bez e.preventDefault(), aby fungovalo scrollování!
+        secretTitle.addEventListener('touchstart', () => { startPress(); }, { passive: true });
+        secretTitle.addEventListener('touchend', () => { releasePress(); }, { passive: true });
         secretTitle.addEventListener('touchcancel', releasePress);
 
         // Mouse eventy (Desktop myš, kdyby chtěli zkoušet)
