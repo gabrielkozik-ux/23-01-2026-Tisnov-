@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,45 +8,58 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0f172a;
             color: #e2e8f0;
         }
-        
+
         /* Neon Effects */
         .neon-blue {
             box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
             border: 1px solid rgba(56, 189, 248, 0.3);
         }
+
         .neon-red {
             box-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
             border: 1px solid rgba(248, 113, 113, 0.3);
         }
-        
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
-            background: #0f172a; 
+            background: #0f172a;
         }
+
         ::-webkit-scrollbar-thumb {
-            background: #334155; 
+            background: #334155;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569; 
+            background: #475569;
         }
 
         /* Animations */
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .details-content {
@@ -54,19 +68,22 @@
             opacity: 0;
             overflow: hidden;
         }
+
         .details-content.open {
-            max-height: 1000px; 
+            max-height: 1000px;
             opacity: 1;
         }
-        
+
         .rotate-icon {
             transition: transform 0.3s ease;
         }
+
         .rotate-icon.open {
             transform: rotate(180deg);
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
 
     <header class="relative overflow-hidden bg-slate-900 py-12 px-4 text-center border-b border-slate-800">
@@ -74,15 +91,18 @@
             <div class="absolute right-10 top-10 w-64 h-64 bg-blue-500 rounded-full blur-3xl"></div>
             <div class="absolute left-10 bottom-10 w-64 h-64 bg-red-500 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div class="relative z-10 max-w-4xl mx-auto">
-            <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-900/30 rounded-full border border-cyan-500/30">
+            <div
+                class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-900/30 rounded-full border border-cyan-500/30">
                 Tišnovské Gymnázium 2026
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-2 text-white">
-                PRÁVO PRO <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">PŘEŽITÍ</span>
+            <h1 id="secret-title-trigger"
+                class="text-4xl md:text-6xl font-extrabold tracking-tight mb-2 text-white select-none cursor-pointer">
+                PRÁVO PRO <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 pointer-events-none">PŘEŽITÍ</span>
             </h1>
-            <p class="text-slate-200 text-lg md:text-xl mt-4 max-w-2xl mx-auto">
+            <p class="text-slate-200 text-lg md:text-xl mt-4 max-w-2xl mx-auto pointer-events-none">
                 Maturitní speciál: Jak neskončit v exekuci, v base nebo s ostudou na internetu.
             </p>
             <div class="mt-6 flex justify-center gap-4">
@@ -98,23 +118,31 @@
 
     <nav class="flex justify-center -mt-6 z-20 px-4">
         <div class="bg-slate-800 p-1 rounded-xl shadow-2xl flex w-full max-w-lg border border-slate-700">
-            <button onclick="switchTab('civil')" id="btn-civil" class="flex-1 py-3 rounded-lg text-sm md:text-base font-bold transition-all duration-300 bg-cyan-600 text-white shadow-lg flex items-center justify-center gap-2">
-                <i class="fas fa-money-bill-wave"></i> 1. Peníze & Byznys
+            <button onclick="switchTab('civil')" id="btn-civil"
+                class="flex-1 min-h-[48px] py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-300 bg-cyan-600 text-white shadow-lg flex items-center justify-center gap-1">
+                <i class="fas fa-money-bill-wave"></i> Byznys
             </button>
-            <button onclick="switchTab('criminal')" id="btn-criminal" class="flex-1 py-3 rounded-lg text-sm md:text-base font-bold transition-all duration-300 text-slate-200 hover:text-white flex items-center justify-center gap-2">
-                <i class="fas fa-handcuffs"></i> 2. Zločin & Trest
+            <button onclick="switchTab('criminal')" id="btn-criminal"
+                class="flex-1 min-h-[48px] py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-300 text-slate-200 hover:text-white flex items-center justify-center gap-1">
+                <i class="fas fa-handcuffs"></i> Zločin
+            </button>
+            <button onclick="switchTab('quiz')" id="btn-quiz"
+                class="hidden flex-1 min-h-[48px] py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-300 text-slate-200 hover:text-white items-center justify-center gap-1 border-l border-slate-700/50">
+                <i class="fas fa-gamepad text-yellow-500"></i> Kvíz
             </button>
         </div>
     </nav>
-
     <main class="flex-grow container mx-auto px-4 py-12 max-w-4xl">
 
         <div id="content-civil" class="fade-in space-y-6">
-            
-            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
-                <button onclick="toggleAccordion('acc-work')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+
+            <div
+                class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
+                <button onclick="toggleAccordion('acc-work')"
+                    class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-cyan-900/50 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-cyan-900/50 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
                             <i class="fas fa-file-contract"></i>
                         </div>
                         <div>
@@ -144,18 +172,49 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-2 border-cyan-400 text-sm">
+                            <strong class="text-white"><i class="fas fa-laptop-house text-cyan-400 mr-2"></i> Příklad z
+                                praxe:</strong><br>
+                            <span class="text-slate-300 mt-1 inline-block">Smažeš omylem produkční databázi a firma
+                                stojí týden. Jako <strong class="text-green-400 font-medium">zaměstnanec</strong> (při
+                                platu 40k) zaplatíš ze zákona maximálně 180 tisíc Kč (4,5 násobek), zbytek nese firma.
+                                Jako <strong class="text-red-400 font-medium">Ičař</strong> ručíš za celou milionovou
+                                škodu i ušlý zisk a exekutor ti může vzít dům.</span>
+                        </div>
+
                         <div class="bg-cyan-900/20 p-4 rounded border border-cyan-500/30 text-sm">
-                            <strong class="text-cyan-400"><i class="fas fa-lightbulb"></i> Rada Advokáta:</strong> 
-                            IČO má své výhody, ale pouze tam, kde dlouhodobě dává smysl.
+                            <strong class="text-cyan-400"><i class="fas fa-lightbulb"></i> Rada Advokáta:</strong>
+                            IČO má své výhody, ale pouze tam, kde dlouhodobě dává smysl. Nedělej to jen proto, že "to
+                            tak dělají všichni".
+                        </div>
+
+                        <!-- Interakce -->
+                        <div class="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                            <button onclick="handleVote(this)"
+                                class="flex-1 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                                <i class="fas fa-bomb text-red-400"></i> Tohle byl šok!
+                            </button>
+                            <button onclick="handleVote(this)"
+                                class="flex-1 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                                <i class="fas fa-check text-green-400"></i> Věděl/a jsem
+                            </button>
+                            <button
+                                onclick="shareSection('Švarcsystém: Faktura vs. Smlouva. Věděl jsi to?', window.location.href)"
+                                class="w-12 h-[44px] bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-share-nodes"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
-                <button onclick="toggleAccordion('acc-house')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+            <div
+                class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
+                <button onclick="toggleAccordion('acc-house')"
+                    class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-cyan-900/50 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-cyan-900/50 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
                             <i class="fas fa-house-user"></i>
                         </div>
                         <div>
@@ -167,22 +226,55 @@
                 </button>
                 <div id="acc-house" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-3">
-                        <p>Když podepíšeš nájemní smlouvu na byt v Brně pro 6 lidí jen TY, dlužíš majiteli peníze jen TY.</p>
+                        <p>Když podepíšeš nájemní smlouvu na byt v Brně pro 6 lidí jen TY, dlužíš majiteli peníze jen
+                            TY.</p>
                         <ul class="list-disc list-inside text-sm space-y-1 text-slate-200">
                             <li>Když kamarád nezaplatí, exekutor jde po tobě.</li>
                             <li>Od 18 let jsi plně svéprávný/á. Rodiče nejsou tvůj štít.</li>
                         </ul>
-                        <div class="bg-yellow-900/20 p-3 rounded border border-yellow-600/30 text-sm mt-2">
-                            <strong class="text-yellow-500">Řešení:</strong> Buď všichni ve smlouvě, nebo měj podepsané <strong>podnájemní smlouvy</strong> s každým spolubydlícím. Stačí na A4, ale musí to být písemně!
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-2 border-cyan-400 text-sm mt-3">
+                            <strong class="text-white"><i class="fas fa-users-slash text-cyan-400 mr-2"></i> Příklad z
+                                praxe:</strong><br>
+                            <span class="text-slate-300 mt-1 inline-block">Karel se upíše na byt pro 4 studenty za 30
+                                tisíc měsíčně. Bydlí s ním 3 další, ale na smlouvě je sám. Kluci se pohádají, přestanou
+                                mu posílat peníze a odstěhují se. Karel ten nájem <strong>musí doplatit ze
+                                    svého</strong>, jinak dluží on sám a hrozí mu exekuce. Peníze pak musí z kamarádů
+                                složitě vymáhat soudně, a to často bez důkazů.</span>
+                        </div>
+
+                        <div class="bg-yellow-900/20 p-3 rounded border border-yellow-600/30 text-sm mt-4">
+                            <strong class="text-yellow-500">Řešení:</strong> Buď všichni ve smlouvě, nebo měj podepsané
+                            <strong>podnájemní smlouvy</strong> s každým spolubydlícím. Stačí na A4, ale musí to být
+                            písemně!
+                        </div>
+
+                        <!-- Interakce -->
+                        <div class="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                            <button onclick="handleVote(this)"
+                                class="flex-1 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                                <i class="fas fa-bomb text-red-400"></i> Dobrej chyták
+                            </button>
+                            <button onclick="handleVote(this)"
+                                class="flex-1 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                                <i class="fas fa-check text-green-400"></i> Jasná věc
+                            </button>
+                            <button
+                                onclick="shareSection('Past spolubydlení: Jeden podpis vládne všem. Dej si na to bacha!', window.location.href)"
+                                class="w-12 h-[44px] bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-share-nodes"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
-                <button onclick="toggleAccordion('acc-ai')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+            <div
+                class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-colors group">
+                <button onclick="toggleAccordion('acc-ai')"
+                    class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-cyan-900/50 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-cyan-900/50 flex items-center justify-center text-cyan-400 text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
                             <i class="fas fa-robot"></i>
                         </div>
                         <div>
@@ -195,9 +287,42 @@
                 <div id="acc-ai" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-3">
                         <div class="flex flex-col gap-2 text-sm">
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> <strong>Autorem je člověk:</strong> Co vytvoří AI, je Public Domain (volné dílo). Kdokoliv to může zkopírovat.</p>
-                            <p><i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i> <strong>Free verze:</strong> Často zakazují komerční užití. Čtěte Terms of Service!</p>
-                            <p><i class="fas fa-skull text-red-500 mr-2"></i> <strong>Deepfakes:</strong> Použít hlas celebrity do reklamy? To není autorské právo, to je Ochrana osobnosti. Pokuta v řádu statisíců.</p>
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> <strong>Autorem je člověk:</strong> Co
+                                vytvoří AI, je Public Domain (volné dílo). Kdokoliv to může zkopírovat.</p>
+                            <p><i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i> <strong>Free
+                                    verze:</strong> Často zakazují komerční užití. Čtěte Terms of Service!</p>
+                            <p><i class="fas fa-skull text-red-500 mr-2"></i> <strong>Deepfakes:</strong> Použít hlas
+                                celebrity do reklamy? To není autorské právo, to je Ochrana osobnosti. Pokuta v řádu
+                                statisíců.</p>
+                        </div>
+
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-2 border-cyan-400 text-sm mt-4">
+                            <strong class="text-white"><i class="fas fa-paint-brush text-cyan-400 mr-2"></i> Příklad z
+                                praxe:</strong><br>
+                            <span class="text-slate-300 mt-1 inline-block">Necháš AI vygenerovat hlavní vizuál pro tvůj
+                                nadějný e-shop s oblečením, do kterého vrazíš statisíce v reklamě. Za rok vizuál drze
+                                okopíruje asijský drop-shipper. <strong>U soudu bys pravděpodobně ostrouhal.</strong>
+                                Cizí
+                                firmu nezastavíš, protože obrázek z AI není tvé autorské dílo (je to public domain) a
+                                nemáš
+                                exkluzivitu.</span>
+                        </div>
+
+                        <!-- Interakce -->
+                        <div class="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                            <button onclick="handleVote(this)"
+                                class="flex-1 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                                <i class="fas fa-robot text-purple-400"></i> AI je divočina
+                            </button>
+                            <button onclick="handleVote(this)"
+                                class="flex-1 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                                <i class="fas fa-check text-green-400"></i> Tohle už vím
+                            </button>
+                            <button
+                                onclick="shareSection('AI & Byznys: Komu patří obrázek z Midjourney?', window.location.href)"
+                                class="w-12 h-[44px] bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-share-nodes"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -205,11 +330,14 @@
         </div>
 
         <div id="content-criminal" class="hidden fade-in space-y-6">
-            
-            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
-                <button onclick="toggleAccordion('acc-police')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+
+            <div
+                class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
+                <button onclick="toggleAccordion('acc-police')"
+                    class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-red-900/50 flex items-center justify-center text-red-400 text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-red-900/50 flex items-center justify-center text-red-400 text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
                             <i class="fas fa-user-shield"></i>
                         </div>
                         <div>
@@ -238,19 +366,34 @@
                                 <p class="text-xs text-slate-300">Řidič nesmí odmítnout!</p>
                             </div>
                         </div>
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-2 border-red-400 text-sm my-4 text-left">
+                            <strong class="text-white"><i class="fas fa-video-slash text-red-400 mr-2"></i> Příklad z
+                                praxe:</strong><br>
+                            <span class="text-slate-300 mt-1 inline-block">Dostaneš pokutu, se kterou nesouhlasíš.
+                                Vytáhneš mobil a natáčíš zásah (smíš to, je to tvé právo občanské kontroly). Pokud ale
+                                začneš policistovi strkat telefon 10 cm před obličej, křičet a fyzicky mu překážet v
+                                práci, koleduješ si o zbytečný problém — typicky jde o přestupek <strong>neuposlechnutí
+                                    výzvy</strong> nebo snížení vážnosti úřední osoby, za což je pokuta až 10 000
+                                Kč.</span>
+                        </div>
+
                         <div class="bg-red-900/20 p-4 rounded border border-red-500/50 text-center">
                             <h4 class="text-red-400 font-bold uppercase text-sm mb-2">Zlaté pravidlo advokáta</h4>
                             <p class="italic text-white text-lg">"Odepírám výpověď."</p>
-                            <p class="text-xs text-slate-200 mt-2">Není to drzost. Je to tvoje Ústavní právo. Nesnaž se z toho "vykecat".</p>
+                            <p class="text-xs text-slate-200 mt-2">Není to drzost. Je to tvoje Ústavní právo. Nesnaž se
+                                z toho "vykecat".</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
-                <button onclick="toggleAccordion('acc-nudes')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+            <div
+                class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
+                <button onclick="toggleAccordion('acc-nudes')"
+                    class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-red-900/50 flex items-center justify-center text-red-400 text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-red-900/50 flex items-center justify-center text-red-400 text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                         <div>
@@ -262,45 +405,119 @@
                 </button>
                 <div id="acc-nudes" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4 space-y-3">
-                         <div class="bg-slate-900 p-4 rounded border-l-4 border-purple-500">
+                        <div class="bg-slate-900 p-4 rounded border-l-4 border-purple-500">
                             <h4 class="font-bold text-purple-400">Rovnice průšvihu:</h4>
-                            <p class="text-sm mt-1">Ty (19 let) + Partnerka (17 let) + Nudes v mobilu = <strong class="text-white">Dětská pornografie</strong>.</p>
-                         </div>
-                         <ul class="list-disc list-inside text-sm space-y-2 text-slate-200">
-                            <li><strong>Přeposlání fotky:</strong> Trestný čin (Šíření). Záznam v rejstříku. Konec kariéry.</li>
-                            <li><strong>Revenge Porn:</strong> Pomsta po rozchodu tě bude stát podmínku a 150 000 Kč odškodného.</li>
+                            <p class="text-sm mt-1">Ty (19 let) + Partnerka (17 let) + Nudes v mobilu = <strong
+                                    class="text-white">Dětská pornografie</strong>.</p>
+                        </div>
+                        <ul class="list-disc list-inside text-sm space-y-2 text-slate-200">
+                            <li><strong>Přeposlání fotky:</strong> Trestný čin (Šíření). Záznam v rejstříku. Konec
+                                kariéry.</li>
+                            <li><strong>Revenge Porn:</strong> Pomsta po rozchodu tě bude stát podmínku a 150 000 Kč
+                                odškodného.</li>
                             <li><strong>Nudify AI:</strong> I fake fotka je trestná (poškození cizích práv).</li>
                         </ul>
+
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-2 border-red-400 text-sm mt-4">
+                            <strong class="text-white"><i class="fas fa-share-square text-red-400 mr-2"></i> Příklad z
+                                praxe:</strong><br>
+                            <span class="text-slate-300 mt-1 inline-block">Ex (17 let) ti před měsícem poslala nahou
+                                fotku. Po naštvaném rozchodu se chceš pomstít a pošleš to "vtipně" na soukromý Discord s
+                                kamarády. Kdokoliv ze skupiny může fotku zneužít dál (školažení, šikana). Pokud rodiče
+                                nebo škola podají trestní oznámení, běží ti stíhání pro <strong>výrobu a jiné nakládání
+                                    s dětskou pornografií</strong>. A protože jsi nad 18 let, jsi plně trestně
+                                odpovědný.</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
-                <button onclick="toggleAccordion('acc-court')" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+            <div
+                class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
+                <button onclick="toggleAccordion('acc-court')"
+                    class="w-full flex justify-between items-center p-6 text-left focus:outline-none min-h-[80px]">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-red-900/50 flex items-center justify-center text-red-400 text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-red-900/50 flex items-center justify-center text-red-400 text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
                             <i class="fas fa-gavel"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-white">Gamifikace: Soudní síň</h3>
-                            <p class="text-slate-200 text-sm">Kdy je "sranda" trestný čin?</p>
+                            <h3 class="text-xl font-bold text-white">Soudní síň: Kdy je to trestňák?</h3>
+                            <p class="text-slate-200 text-sm">Rozhodni případ vyhrožování</p>
                         </div>
                     </div>
                     <i id="icon-acc-court" class="fas fa-chevron-down text-slate-300 rotate-icon"></i>
                 </button>
                 <div id="acc-court" class="details-content px-6 pb-6 text-slate-100 border-t border-slate-700/50">
                     <div class="mt-4">
-                        <p class="text-sm italic mb-3">"Takový špíny by se měly střílet. Vím, do jakýho fitka chodíš. 🔫💀"</p>
-                        
-                        <div class="bg-black/40 p-3 rounded text-center">
-                            <span id="secret-verdict" class="text-red-500 font-extrabold text-lg tracking-widest transition-all duration-300">VERDIKT: ???</span>
-                            <p id="secret-explanation" class="text-xs text-slate-200 mt-1 blur-sm select-none transition-all duration-500">
-                                Rozhodni ty! (Čekej na odhalení)
-                            </p>
+                        <p class="text-sm italic mb-3 bg-slate-900 p-4 rounded-lg border border-slate-700">"Takový špíny
+                            by se měly střílet. Vím, do jakýho fitka chodíš. 🔫💀"</p>
+
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <button onclick="revealVerdict(this, false)"
+                                class="p-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-sm font-bold transition-colors">
+                                V pohodě, jen kecy
+                            </button>
+                            <button onclick="revealVerdict(this, true)"
+                                class="p-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-sm font-bold transition-colors">
+                                Vinen: Trestný čin
+                            </button>
                         </div>
 
-                        <p class="text-xs text-slate-300 mt-3 text-center">Svoboda slova končí tam, kde začíná strach o život.</p>
+                        <div id="interactive-verdict"
+                            class="hidden bg-black/40 p-4 rounded text-center border border-slate-700/50">
+                            <span id="secret-verdict"
+                                class="font-extrabold text-xl tracking-widest block mb-1 text-slate-500"></span>
+                            <p id="secret-explanation" class="text-sm text-slate-400"></p>
+                        </div>
+
+                        <p class="text-xs text-slate-400 mt-4 text-center">Svoboda slova končí tam, kde začíná strach o
+                            život.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: KVÍZ (Quiz Section) -->
+        <div id="content-quiz" class="hidden fade-in space-y-6">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-white"><i class="fas fa-skull text-yellow-500 mr-2"></i> Přežil bys?
+                </h2>
+                <p class="text-slate-300 mt-2 text-sm">3 rychlé otázky. Zjisti, jestli bys skončil v exekuci nebo na
+                    policii.</p>
+            </div>
+
+            <div id="quiz-container"
+                class="bg-slate-800/80 border border-slate-700 rounded-xl p-6 relative min-h-[300px] flex flex-col justify-center">
+
+                <div id="quiz-questions-area">
+                    <!-- Otázky se generují sem Javascriptem -->
+                </div>
+
+                <!-- Výsledek -->
+                <div id="quiz-result" class="hidden text-center">
+                    <div id="score-icon" class="text-6xl mb-4"></div>
+                    <h3 id="score-title" class="text-3xl font-bold text-white mb-2"></h3>
+                    <p id="score-desc" class="text-slate-300 mb-6"></p>
+
+                    <button
+                        onclick="shareSection('Můj výsledek v kvízu: Právo pro přežití! Troufneš si taky?', window.location.href)"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold transition-colors w-full md:w-auto shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 mx-auto">
+                        <i class="fas fa-share-nodes"></i> Nasdílet výsledek kámošům
+                    </button>
+                    <button onclick="resetQuiz()" class="mt-4 text-sm text-slate-400 hover:text-white underline">Chci to
+                        zkusit znovu</button>
+                </div>
+
+                <!-- Feedback overlay po kliku na odpověď -->
+                <div id="quiz-feedback"
+                    class="absolute inset-0 bg-slate-900/95 backdrop-blur-sm hidden flex-col items-center justify-center p-6 text-center rounded-xl z-10">
+                    <div id="feedback-icon" class="text-5xl mb-4"></div>
+                    <p id="feedback-text" class="text-lg text-white font-medium mb-6"></p>
+                    <button onclick="nextQuizStep()"
+                        class="px-8 min-h-[48px] bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-bold transition-colors w-full md:w-auto">
+                        Pokračovat
+                    </button>
                 </div>
             </div>
         </div>
@@ -310,20 +527,18 @@
     <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-auto">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-2xl font-bold text-white mb-4">Ulož si kontakt</h2>
-            
+
             <div class="flex justify-center mb-6">
-                <div class="w-48 h-48 bg-white p-2 rounded-lg flex items-center justify-center overflow-hidden shadow-lg shadow-cyan-500/20">
-                    <img 
-                        src="QR_code.png" 
-                        alt="Naskenuj pro kontakt" 
-                        class="w-full h-full object-contain"
-                        onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-exclamation-circle text-red-500 text-4xl\'></i>'"
-                    >
+                <div
+                    class="w-48 h-48 bg-white p-2 rounded-lg flex items-center justify-center overflow-hidden shadow-lg shadow-cyan-500/20">
+                    <img src="QR_code.png" alt="Naskenuj pro kontakt" class="w-full h-full object-contain"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-exclamation-circle text-red-500 text-4xl\'></i>'">
                 </div>
             </div>
 
             <p class="text-slate-200 text-sm mb-4">Právo přeje bdělým. Neřeš to, až když zvoní exekutor.</p>
-            <a href="#" class="inline-block px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full border border-slate-600 transition text-sm">
+            <a href="#"
+                class="inline-block px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full border border-slate-600 transition text-sm">
                 <i class="fas fa-envelope mr-2"></i> kozik@iustoria.cz
             </a>
             <p class="text-xs text-slate-400 mt-8">© 2026 IUSTORIA Advokátní kancelář | Tišnov, Brno</p>
@@ -331,65 +546,379 @@
     </footer>
 
     <script>
+        let quizScore = 0;
+        let currentQuizStep = 1;
+
         function switchTab(tab) {
-            const btnCivil = document.getElementById('btn-civil');
-            const btnCriminal = document.getElementById('btn-criminal');
-            const contentCivil = document.getElementById('content-civil');
-            const contentCriminal = document.getElementById('content-criminal');
+            const tabs = ['civil', 'criminal', 'quiz'];
 
-            if (tab === 'civil') {
-                btnCivil.classList.remove('text-slate-200', 'hover:text-white');
-                btnCivil.classList.add('bg-cyan-600', 'text-white', 'shadow-lg');
-                
-                btnCriminal.classList.add('text-slate-200', 'hover:text-white');
-                btnCriminal.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
+            tabs.forEach(t => {
+                const btn = document.getElementById('btn-' + t);
+                const content = document.getElementById('content-' + t);
 
-                contentCivil.classList.remove('hidden');
-                contentCriminal.classList.add('hidden');
-            } else {
-                btnCivil.classList.add('text-slate-200', 'hover:text-white');
-                btnCivil.classList.remove('bg-cyan-600', 'text-white', 'shadow-lg');
+                if (btn && content) { // kontrola existence
+                    if (t === tab) {
+                        btn.classList.remove('text-slate-200', 'hover:text-white');
 
-                btnCriminal.classList.remove('text-slate-200', 'hover:text-white');
-                btnCriminal.classList.add('bg-red-600', 'text-white', 'shadow-lg');
+                        if (t === 'quiz') {
+                            btn.classList.add('bg-yellow-600', 'text-white', 'shadow-lg');
+                        } else if (t === 'civil') {
+                            btn.classList.add('bg-cyan-600', 'text-white', 'shadow-lg');
+                        } else {
+                            btn.classList.add('bg-red-600', 'text-white', 'shadow-lg');
+                        }
+                        content.classList.remove('hidden');
+                    } else {
+                        if (t === 'quiz') btn.classList.remove('bg-yellow-600', 'text-white', 'shadow-lg');
+                        if (t === 'civil') btn.classList.remove('bg-cyan-600', 'text-white', 'shadow-lg');
+                        if (t === 'criminal') btn.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
 
-                contentCivil.classList.add('hidden');
-                contentCriminal.classList.remove('hidden');
-            }
+                        btn.classList.add('text-slate-200', 'hover:text-white');
+                        content.classList.add('hidden');
+                    }
+                }
+            });
         }
 
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = document.getElementById('icon-' + id);
-            
+
             content.classList.toggle('open');
             icon.classList.toggle('open');
         }
 
-        // SECRET KEY LISTENER (Press 'X' to reveal verdict)
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'x' || event.key === 'X') {
-                const verdictElement = document.getElementById('secret-verdict');
-                const explanation = document.getElementById('secret-explanation');
-                
-                if (verdictElement && explanation) {
-                    if (verdictElement.innerHTML.includes("???")) {
-                        // ODHALENÍ
-                        verdictElement.innerHTML = "VERDIKT: VINEN";
-                        verdictElement.classList.add("scale-125");
-                        setTimeout(() => verdictElement.classList.remove("scale-125"), 300);
-
-                        explanation.innerHTML = "Nebezpečné vyhrožování (§ 353). Podmínka + Záznam.";
-                        explanation.classList.remove("blur-sm");
-                    } else {
-                        // SKRYTÍ (Reset)
-                        verdictElement.innerHTML = "VERDIKT: ???";
-                        explanation.innerHTML = "Rozhodni ty! (Čekej na odhalení)";
-                        explanation.classList.add("blur-sm");
-                    }
+        // Hlasování UI
+        function handleVote(btn) {
+            const parent = btn.parentElement;
+            // Disable ostatní tlačíkta
+            Array.from(parent.children).forEach(child => {
+                if (child.tagName === 'BUTTON' && !child.innerHTML.includes('fa-share-nodes')) {
+                    child.disabled = true;
+                    child.classList.replace('bg-slate-800', 'bg-slate-900');
+                    child.classList.add('opacity-50');
                 }
+            });
+            // Highlight kliknuté
+            btn.classList.remove('bg-slate-900', 'opacity-50');
+            btn.classList.add('bg-slate-700', 'border-slate-500');
+
+            // Konfety
+            if (window.confetti) {
+                const rect = btn.getBoundingClientRect();
+                confetti({
+                    particleCount: 30,
+                    spread: 40,
+                    origin: {
+                        x: (rect.left + (rect.width / 2)) / window.innerWidth,
+                        y: (rect.top + (rect.height / 2)) / window.innerHeight
+                    },
+                    colors: ['#38bdf8', '#818cf8', '#f472b6']
+                });
+            }
+        }
+
+        // Natvie Share API
+        function shareSection(title, url) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Právo pro přežití',
+                    text: title,
+                    url: url
+                }).catch(err => console.log('Chyba při sdílení:', err));
+            } else {
+                // Fallback pro desktop - zkopírovat do schránky
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Odkaz zkopírován do schránky!');
+                });
+            }
+        }
+
+        // Quiz Sety Logika
+        const quizSets = [
+            // SET 1 (Odpovídá původnímu)
+            [
+                {
+                    q: "Máš živnosťák a rozbiješ neúmyslně dveře za 100 000 Kč u klienta, kam jsi šel spravit síť. Kolik zaplatíš?", a1: "Max. 4,5 násobek průměrného výdělku", a2: "Celou částku (100 000 Kč), ručím celým majetkem", isA2Correct: true,
+                    fbRight: "Správně! Jako OSVČ ručíš celým svým majetkem, žádný ochranný limit neexistuje.", fbWrong: "Špatně! To platí jen pro zaměstnance. Jako Ičař ručíš za všechno."
+                },
+                {
+                    q: "Pronajal sis byt a do smlouvy na sebe napsal další 3 kámoše, co tam bydlí (jsou jako \"spolubydlící\", nájemce jsi ty). Kluci nezaplatili. Kdo dluží majiteli?", a1: "Všichni 4 bydlící, dluh se rozdělí", a2: "Jen a pouze ty", isA2Correct: true,
+                    fbRight: "Přesně tak. Kdo podepíše (byť jako jediný), ten majiteli ručí za všechny peníze.", fbWrong: "Špatně! Pronajímatele zajímá jen ten, kdo podepsal nájemní smlouvu."
+                },
+                {
+                    q: "Zastaví tě policie, ale ty jsi nic neudělal, šel jsi zrovna z párty pěšky. Můžou po tobě chtít občanku?", a1: "Ano, musím prokázat totožnost", a2: "Ne, pokud nejsem obviněn ze zločinu, nemusím nic ukazovat", isA2Correct: false,
+                    fbRight: "Správně! Navíc, pokud ji u sebe nemáš (ani v aplikaci eDoklady), můžeš jít s nimi na stanici.", fbWrong: "Omyl. Prokazování totožnosti je tvá povinnost, pokud tě policista vyzve dle zákona."
+                }
+            ],
+            // SET 2
+            [
+                {
+                    q: "Vytvoříš přes Midjourney vizuály pro reklamní kampaň. Konkurence ti je ukradne. Můžeš se soudit?", a1: "Ano, mám k nim autorská práva", a2: "Ne, AI umění nelze chránit autorským právem", isA2Correct: true,
+                    fbRight: "Správně! Autorem může být jen člověk. Co vypadne z AI, patří všem.", fbWrong: "Bohužel ne. Vygenerovaný obrázek je z hlediska práva tzv. volné dílo."
+                },
+                {
+                    q: "Přijel jsi na koloběžce z párty. Policista ti dá fouknout, ty jsi v pohodě, takže odmítneš s tím, že spěcháš.", a1: "Nevadí, mám na to právo", a2: "Průšvih, bere se to jako nejvyšší trest", isA2Correct: true,
+                    fbRight: "Bohužel ano. Odmítnutí se automaticky trestá nejvyšší možnou sazbou pokuty a zákazem.", fbWrong: "Ne, odmítnutí dechové zkoušky je fatální chyba."
+                },
+                {
+                    q: "Tvoje 17letá ex na tebe podá trestní oznámení, protože jsi poslal kamarádům na Discord její nudes.", a1: "Je to šíření dětské pornografie", a2: "Je to jen přestupek (pomluva)", isA2Correct: false,
+                    fbRight: "Přesně. Jí nebylo 18 = dětské porno. I pouhé přeposlání je trestné.", fbWrong: "Omyl! Tohle je tvrdý trestný čin šíření dětské pornografie."
+                }
+            ],
+            // SET 3
+            [
+                {
+                    q: "Jako zaměstnanec omylem poškodíš služební auto v hodnotě milionu. Škodu jsi neudělal schválně.", a1: "Zaplatím maximálně 4,5 násobek svého platu", a2: "Zaplatím plnou cenu milionu Kč", isA2Correct: false,
+                    fbRight: "Správně. Toto je obrovská výhoda pracovní smlouvy oproti IČO.", fbWrong: "Ne, zákoník práce tě chrání limitem 4,5x tvé hrubé mzdy pro neúmyslnou škodu."
+                },
+                {
+                    q: "U výslechu na tebe policie tlačí, abys vysvětlil detail, který se stal večer. Co bys měl udělat?", a1: "Vymyslet si přijatelnou lež, abych měl klid", a2: "Slušně odepřít výpověď", isA2Correct: true,
+                    fbRight: "Přesně! Je to tvé Ústavní právo, ne drzost. Mlčeti zlato.", fbWrong: "Nejhorší co můžeš udělat. Zapleteš se do toho a obviní tě. Odepři výpověď."
+                },
+                {
+                    q: "Kámoš založí s.r.o. a poprosí tě v 18letech, ať mu děláš jednatele, že to nic není. Firma naseká dluhy.", a1: "Jako jednatel za dluhy v nejhořším ručím svým majetkem", a2: "Nic se mi nestane, firma ručí jen svým majetkem", isA2Correct: false,
+                    fbRight: "Správně! Jednatel má povinnost péče řádného hospodáře. Můžeš to odskákat.", fbWrong: "Obrovský omyl. Statutární orgán (jednatel) při porušení povinností ručí za dluhy osobně."
+                }
+            ],
+            // SET 4
+            [
+                {
+                    q: "Někdo mi na netu pod fotkou vyhrožuje: Vím, kde bydlíš, mrtvých se ptát nebudou. Nahlásím to.", a1: "Bude smetené jako běžná hádka z internetu", a2: "Jde o trestný čin nebezpečného vyhrožování", isA2Correct: true,
+                    fbRight: "Správně! Důvodná obava o život = trestný čin, často i s podmínkou.", fbWrong: "Omyl, jakmile hrozba obsahuje reálné rysy úmrtí, policie to musí řešit."
+                },
+                {
+                    q: "Použiju cizí AI model pro naklonování hlasu známého zpěváka do své úžasné reklamy na TikTok.", a1: "Může to být velký zásah do osobnostních práv zpěváka", a2: "Je to volné dílo, hlas si chráním autorským právem", isA2Correct: false,
+                    fbRight: "Správně. Ochrana osobnosti platí i proti deepfakes. Hrozí ti žaloba.", fbWrong: "Špatně! Zasahuješ do ochrany osobnosti, což tě může stát statisíce na náhradách."
+                },
+                {
+                    q: "Spolubydlící přestane platit za zničenou pračku v pronájmu na tvoje jméno. Co máš mít, abys to vymohl zpět?", a1: "Vůbec nic, stačí, že tam byl přihlášený", a2: "Písemnou podnájemní smlouvu k obraně", isA2Correct: true,
+                    fbRight: "Přesně tak, A4 podepsaná oběma stranami ti teď ušetří desetitisíce.", fbWrong: "Omyl! Bez papíru se neprokáže, kdo co dlužil. Musíš mít podnájemku."
+                }
+            ],
+            // SET 5
+            [
+                {
+                    q: "Jako programátor na živnost (Švarcsystém) děláš web a pokazíš migraci dat u banky. Kdo platí pokuty od klientů?", a1: "Firma (bance), ty pak firmě max do 4,5 násobku měsíční faktury", a2: "Banka to naúčtuje firmě a ta tobě plnou škodu.", isA2Correct: true,
+                    fbRight: "Správně. OSVČ ručí neomezeně. Tohle tě může zlikvidovat.", fbWrong: "Špatně. Zaměňuješ IČO se zaměstnáním. Jako OSVČ neseš plné riziko."
+                },
+                {
+                    q: "Sdílíš naštvaně na sociálních sítích intímní fotku expartnerky (jí je 20 let). Je to jen pomluva?", a1: "Ne, pravděpodobně půjde o trestný čin", a2: "Ano, dostanu maximálně nějakou malou pokutu", isA2Correct: false,
+                    fbRight: "Přesně. Trestný čin porušení tajemství listin a jiných dokumentů/poškození cizích práv.", fbWrong: "Omyl! Říká se tomu Revenge Porn a u soudů se to trestá velmi přísně."
+                },
+                {
+                    q: "Prokážeš se u policie apkou eDoklady. Pak ji ale chytíš za ruku a začneš natáčet z blízkosti obličeje.", a1: "Až 10 000 Kč bloková pokuta na místě", a2: "Mám právo ji natáčet, nesmí nic udělat", isA2Correct: false,
+                    fbRight: "Správně! Bránit policii v úkonu natáčením z 10 cm je přestupek proti pořádku.", fbWrong: "Máš právo točit, ale nesmíš bránit v činnosti nebo porušovat odstup."
+                }
+            ]
+        ];
+
+        let activeQuizSet = [];
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-questions-area');
+            container.innerHTML = '';
+
+            activeQuizSet.forEach((q, index) => {
+                const isHidden = index === 0 ? '' : 'hidden';
+                container.innerHTML += `
+                    <div class="quiz-step ${isHidden}" data-step="${index + 1}">
+                        <div class="text-xs font-bold text-yellow-500 mb-2">OTÁZKA ${index + 1}/3</div>
+                        <h3 class="text-xl font-bold text-white mb-6">${q.q}</h3>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(${index + 1}, ${!q.isA2Correct}, '${!q.isA2Correct ? q.fbRight : q.fbWrong}')" class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-${!q.isA2Correct ? 'yellow' : 'cyan'}-500 transition-colors">A) ${q.a1}</button>
+                            <button onclick="answerQuiz(${index + 1}, ${q.isA2Correct}, '${q.isA2Correct ? q.fbRight : q.fbWrong}')" class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-${q.isA2Correct ? 'yellow' : 'cyan'}-500 transition-colors">B) ${q.a2}</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Kvíz Logika
+        function answerQuiz(step, isCorrect, feedback) {
+            if (isCorrect) quizScore++;
+
+            const feedbackOverlay = document.getElementById('quiz-feedback');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackText = document.getElementById('feedback-text');
+
+            feedbackText.innerText = feedback;
+
+            if (isCorrect) {
+                feedbackIcon.innerHTML = '<i class="fas fa-check-circle text-green-500"></i>';
+                if (window.confetti) confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+            } else {
+                feedbackIcon.innerHTML = '<i class="fas fa-times-circle text-red-500"></i>';
+                feedbackOverlay.classList.add('animate-pulse');
+                setTimeout(() => feedbackOverlay.classList.remove('animate-pulse'), 500);
+            }
+
+            feedbackOverlay.classList.remove('hidden');
+            feedbackOverlay.classList.add('flex');
+        }
+
+        function nextQuizStep() {
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-feedback').classList.remove('flex');
+
+            document.querySelector(`.quiz-step[data-step="${currentQuizStep}"]`).classList.add('hidden');
+            currentQuizStep++;
+
+            const nextStepEl = document.querySelector(`.quiz-step[data-step="${currentQuizStep}"]`);
+            if (nextStepEl) {
+                nextStepEl.classList.remove('hidden');
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            const resultBox = document.getElementById('quiz-result');
+            const icon = document.getElementById('score-icon');
+            const title = document.getElementById('score-title');
+            const desc = document.getElementById('score-desc');
+
+            if (quizScore === 3) {
+                icon.innerHTML = '👑';
+                title.innerText = 'Přežil jsi!';
+                title.classList.add('text-green-400');
+                desc.innerText = 'Gratulace. Exekuce, vězení ani ostuda ti zatím nehrozí.';
+                if (window.confetti) {
+                    var duration = 3 * 1000;
+                    var end = Date.now() + duration;
+                    (function frame() {
+                        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#38bdf8', '#818cf8', '#f472b6'] });
+                        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#38bdf8', '#818cf8', '#f472b6'] });
+                        if (Date.now() < end) { requestAnimationFrame(frame); }
+                    }());
+                }
+            } else if (quizScore === 2) {
+                icon.innerHTML = '😅';
+                title.innerText = 'Vyvázl jsi s podmínkou';
+                title.classList.add('text-yellow-400');
+                desc.innerText = 'Dvakrát dobrý, ale jednou tě obrali. Dej si příště rande s právníkem.';
+            } else {
+                icon.innerHTML = '💀';
+                title.innerText = 'Game Over';
+                title.classList.add('text-red-500');
+                desc.innerText = 'Totálně jsi to projel. Ulož si ten kontakt do telefonu (QR v patičce), budeš ho potřebovat.';
+            }
+
+            resultBox.classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            quizScore = 0;
+            currentQuizStep = 1;
+
+            // Randomize question set
+            const randomIndex = Math.floor(Math.random() * quizSets.length);
+            activeQuizSet = quizSets[randomIndex];
+            renderQuiz();
+
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('score-title').className = 'text-3xl font-bold mb-2'; // reset barev
+        }
+
+        // Init prnví quiz při načtení
+        document.addEventListener('DOMContentLoaded', () => {
+            resetQuiz();
+        });
+
+        // Interaktivní odhalení - Vrácení tlačítek (dle instrukcí)
+        function revealVerdict(btn, isGuilty) {
+            const verdictBox = document.getElementById('interactive-verdict');
+            const verdictTitle = document.getElementById('secret-verdict');
+            const verdictDesc = document.getElementById('secret-explanation');
+
+            verdictBox.classList.remove('hidden', 'border-red-500/50', 'border-green-500/50');
+
+            if (isGuilty) {
+                verdictTitle.innerText = "SPRÁVNĚ! VINEN.";
+                verdictTitle.className = "font-extrabold text-xl tracking-widest block mb-2 text-green-400";
+                verdictDesc.innerText = "Nebezpečné vyhrožování (§ 353). Je tam hrozba újmou na zdraví. Podmínka + Záznam.";
+                verdictDesc.className = "text-sm text-slate-200";
+                verdictBox.classList.add('border-green-500/50', 'bg-green-900/20');
+                if (window.confetti) confetti({ particleCount: 30, spread: 40 });
+            } else {
+                verdictTitle.innerText = "ŠPATNĚ! JE TO TRESTŇÁK.";
+                verdictTitle.className = "font-extrabold text-xl tracking-widest block mb-2 text-red-500";
+                verdictDesc.className = "text-sm text-slate-200";
+                verdictDesc.innerText = "Věta \"Vím, do jakýho fitka chodíš\" to mění z pouhé nadávky na reálnou hrozbu zdraví.";
+                verdictBox.classList.add('border-red-500/50', 'bg-red-900/20');
+                verdictBox.classList.remove('bg-black/40');
+            }
+
+            // Skryj tlačítka
+            btn.parentElement.classList.add('hidden');
+        }
+
+        // --- UNLOCK LOGIKA ---
+        function unlockQuiz() {
+            const quizBtn = document.getElementById('btn-quiz');
+            if (quizBtn && quizBtn.classList.contains('hidden')) {
+                // Zobraz Quiz Tab
+                quizBtn.classList.remove('hidden');
+                quizBtn.classList.add('flex');
+
+                // Jemná notifikace konfetami (odemčeno)
+                if (window.confetti) {
+                    confetti({
+                        particleCount: 200,
+                        spread: 120,
+                        origin: { y: 0.1 }
+                    });
+                }
+
+                // Rovnou se přepni na Quiz tab
+                switchTab('quiz');
+            }
+        }
+
+        // 1. Odemčení přes Ctrl+X
+        let keysPressed = {};
+        document.addEventListener('keydown', function (event) {
+            keysPressed[event.key] = true;
+
+            if (keysPressed['Control'] && (keysPressed['x'] || keysPressed['X'])) {
+                event.preventDefault();
+                unlockQuiz();
             }
         });
+
+        document.addEventListener('keyup', (event) => {
+            delete keysPressed[event.key];
+        });
+
+        // 2. Odemčení přes "Long Press" (podržení 3 vteřiny na nadpisu) na mobilu
+        const secretTitle = document.getElementById('secret-title-trigger');
+        let pressTimer;
+
+        // Vizuální indikace přidržením (volitelné ztmavení/svícení)
+        function startPress() {
+            secretTitle.classList.add('scale-95', 'opacity-80', 'transition-all');
+            pressTimer = setTimeout(() => {
+                unlockQuiz();
+                releasePress(); // reset css po odemčení
+            }, 3000); // 3 vteřiny
+        }
+
+        function releasePress() {
+            clearTimeout(pressTimer);
+            secretTitle.classList.remove('scale-95', 'opacity-80', 'transition-all');
+        }
+
+        // Touch eventy (Mobily) - bez e.preventDefault(), aby fungovalo scrollování!
+        secretTitle.addEventListener('touchstart', () => { startPress(); }, { passive: true });
+        secretTitle.addEventListener('touchend', () => { releasePress(); }, { passive: true });
+        secretTitle.addEventListener('touchcancel', releasePress);
+
+        // Mouse eventy (Desktop myš, kdyby chtěli zkoušet)
+        secretTitle.addEventListener('mousedown', startPress);
+        secretTitle.addEventListener('mouseup', releasePress);
+        secretTitle.addEventListener('mouseleave', releasePress);
+
     </script>
 </body>
+
 </html>
