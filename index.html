@@ -125,10 +125,6 @@
                 class="flex-1 min-h-[48px] py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-300 text-slate-200 hover:text-white flex items-center justify-center gap-1">
                 <i class="fas fa-handcuffs"></i> Zločin
             </button>
-            <button onclick="switchTab('quiz')" id="btn-quiz"
-                class="flex-1 min-h-[48px] py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-300 text-slate-200 hover:text-white flex items-center justify-center gap-1 border-l border-slate-700/50">
-                <i class="fas fa-gamepad text-yellow-500"></i> Kvíz
-            </button>
         </div>
     </nav>
 
@@ -431,7 +427,7 @@
                 </div>
             </div>
 
-            <div <div
+            <div
                 class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-red-500/50 transition-colors group">
                 <button onclick="toggleAccordion('acc-court')"
                     class="w-full flex justify-between items-center p-6 text-left focus:outline-none min-h-[80px]">
@@ -452,20 +448,14 @@
                         <p class="text-sm italic mb-3 bg-slate-900 p-4 rounded-lg border border-slate-700">"Takový špíny
                             by se měly střílet. Vím, do jakýho fitka chodíš. 🔫💀"</p>
 
-                        <div class="grid grid-cols-2 gap-2 mb-4">
-                            <button onclick="revealVerdict(this, false)"
-                                class="p-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-sm font-bold transition-colors">
-                                V pohodě, jen kecy na netu
-                            </button>
-                            <button onclick="revealVerdict(this, true)"
-                                class="p-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-sm font-bold transition-colors">
-                                Vinen: Trestný čin
-                            </button>
-                        </div>
-
-                        <div id="interactive-verdict" class="hidden bg-black/40 p-4 rounded text-center border">
-                            <span id="secret-verdict" class="font-extrabold text-xl tracking-widest block mb-2"></span>
-                            <p id="secret-explanation" class="text-sm text-slate-200"></p>
+                        <div id="interactive-verdict"
+                            class="bg-black/40 p-4 rounded text-center border border-slate-700/50">
+                            <span id="secret-verdict"
+                                class="font-extrabold text-xl tracking-widest block mb-1 text-slate-500">VERDIKT:
+                                ???</span>
+                            <p id="secret-explanation" class="text-sm text-slate-400">
+                                Rozhodni ty! (Zkus zmáčknout Ctrl + X)
+                            </p>
                         </div>
 
                         <p class="text-xs text-slate-400 mt-4 text-center">Svoboda slova končí tam, kde začíná strach o
@@ -475,8 +465,8 @@
             </div>
         </div>
 
-        <!-- NEW: KVÍZ (Quiz Section) -->
-        <div id="content-quiz" class="hidden fade-in space-y-6">
+        <!-- NEW: KVÍZ (Quiz Section) zobrazeno vždy dole pod obsahem -->
+        <div id="content-quiz" class="mt-16 fade-in space-y-6 pt-12 border-t border-slate-800">
             <div class="text-center mb-8">
                 <h2 class="text-2xl font-bold text-white"><i class="fas fa-skull text-yellow-500 mr-2"></i> Přežil bys?
                 </h2>
@@ -486,56 +476,9 @@
 
             <div id="quiz-container"
                 class="bg-slate-800/80 border border-slate-700 rounded-xl p-6 relative min-h-[300px] flex flex-col justify-center">
-                <!-- Otázka 1 -->
-                <div class="quiz-step" data-step="1">
-                    <div class="text-xs font-bold text-yellow-500 mb-2">OTÁZKA 1/3</div>
-                    <h3 class="text-xl font-bold text-white mb-6">Máš živnosťák a rozbiješ neúmyslně dveře za 100 000 Kč
-                        u klienta, kam jsi šel spravit síť. Kolik zaplatíš?</h3>
-                    <div class="space-y-3">
-                        <button
-                            onclick="answerQuiz(1, false, 'Špatně! To platí jen pro zaměstnance. Jako Ičař ručíš za všechno.')"
-                            class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-cyan-500 transition-colors">A)
-                            Max. 4,5 násobek průměrného výdělku</button>
-                        <button
-                            onclick="answerQuiz(1, true, 'Správně! Jako OSVČ ručíš celým svým majetkem, žádný ochranný limit neexistuje.')"
-                            class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-yellow-500 transition-colors">B)
-                            Celou částku (100 000 Kč), ručím celým majetkem</button>
-                    </div>
-                </div>
 
-                <!-- Otázka 2 -->
-                <div class="quiz-step hidden" data-step="2">
-                    <div class="text-xs font-bold text-yellow-500 mb-2">OTÁZKA 2/3</div>
-                    <h3 class="text-xl font-bold text-white mb-6">Pronajal sis byt a do smlouvy na sebe napsal další 3
-                        kámoše, co tam bydlí (jsou jako "spolubydlící", nájemce jsi ty). Kluci nezaplatili. Kdo dluží
-                        majiteli?</h3>
-                    <div class="space-y-3">
-                        <button
-                            onclick="answerQuiz(2, false, 'Špatně! Pronajímatele zajímá jen ten, kdo podepsal nájemní smlouvu.')"
-                            class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-cyan-500 transition-colors">A)
-                            Všichni 4 bydlící, dluh se rozdělí</button>
-                        <button
-                            onclick="answerQuiz(2, true, 'Přesně tak. Kdo podepíše (byť jako jediný), ten majiteli ručí za všechny peníze.')"
-                            class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-yellow-500 transition-colors">B)
-                            Jen a pouze ty</button>
-                    </div>
-                </div>
-
-                <!-- Otázka 3 -->
-                <div class="quiz-step hidden" data-step="3">
-                    <div class="text-xs font-bold text-yellow-500 mb-2">OTÁZKA 3/3</div>
-                    <h3 class="text-xl font-bold text-white mb-6">Zastaví tě policie, ale ty jsi nic neudělal, šel jsi
-                        zrovna z párty pěšky. Můžou po tobě chtít občanku?</h3>
-                    <div class="space-y-3">
-                        <button
-                            onclick="answerQuiz(3, true, 'Správně! Navíc, pokud ji u sebe nemáš (ani v aplikaci eDoklady), můžeš jít s nimi na stanici.')"
-                            class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-yellow-500 transition-colors">A)
-                            Ano, musím prokázat totožnost</button>
-                        <button
-                            onclick="answerQuiz(3, false, 'Omyl. Prokazování totožnosti je tvá povinnost, pokud tě policista vyzve dle zákona.')"
-                            class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-cyan-500 transition-colors">B)
-                            Ne, pokud nejsem obviněn ze zločinu, nemusím nic ukazovat</button>
-                    </div>
+                <div id="quiz-questions-area">
+                    <!-- Otázky se generují sem Javascriptem -->
                 </div>
 
                 <!-- Výsledek -->
@@ -594,7 +537,7 @@
         let currentQuizStep = 1;
 
         function switchTab(tab) {
-            const tabs = ['civil', 'criminal', 'quiz'];
+            const tabs = ['civil', 'criminal'];
 
             tabs.forEach(t => {
                 const btn = document.getElementById('btn-' + t);
@@ -603,16 +546,13 @@
                 if (t === tab) {
                     btn.classList.remove('text-slate-200', 'hover:text-white');
 
-                    if (t === 'quiz') {
-                        btn.classList.add('bg-yellow-600', 'text-white', 'shadow-lg');
-                    } else if (t === 'civil') {
+                    if (t === 'civil') {
                         btn.classList.add('bg-cyan-600', 'text-white', 'shadow-lg');
                     } else {
                         btn.classList.add('bg-red-600', 'text-white', 'shadow-lg');
                     }
                     content.classList.remove('hidden');
                 } else {
-                    if (t === 'quiz') btn.classList.remove('bg-yellow-600', 'text-white', 'shadow-lg');
                     if (t === 'civil') btn.classList.remove('bg-cyan-600', 'text-white', 'shadow-lg');
                     if (t === 'criminal') btn.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
 
@@ -676,6 +616,106 @@
             }
         }
 
+        // Quiz Sety Logika
+        const quizSets = [
+            // SET 1 (Odpovídá původnímu)
+            [
+                {
+                    q: "Máš živnosťák a rozbiješ neúmyslně dveře za 100 000 Kč u klienta, kam jsi šel spravit síť. Kolik zaplatíš?", a1: "Max. 4,5 násobek průměrného výdělku", a2: "Celou částku (100 000 Kč), ručím celým majetkem", isA2Correct: true,
+                    fbRight: "Správně! Jako OSVČ ručíš celým svým majetkem, žádný ochranný limit neexistuje.", fbWrong: "Špatně! To platí jen pro zaměstnance. Jako Ičař ručíš za všechno."
+                },
+                {
+                    q: "Pronajal sis byt a do smlouvy na sebe napsal další 3 kámoše, co tam bydlí (jsou jako \"spolubydlící\", nájemce jsi ty). Kluci nezaplatili. Kdo dluží majiteli?", a1: "Všichni 4 bydlící, dluh se rozdělí", a2: "Jen a pouze ty", isA2Correct: true,
+                    fbRight: "Přesně tak. Kdo podepíše (byť jako jediný), ten majiteli ručí za všechny peníze.", fbWrong: "Špatně! Pronajímatele zajímá jen ten, kdo podepsal nájemní smlouvu."
+                },
+                {
+                    q: "Zastaví tě policie, ale ty jsi nic neudělal, šel jsi zrovna z párty pěšky. Můžou po tobě chtít občanku?", a1: "Ano, musím prokázat totožnost", a2: "Ne, pokud nejsem obviněn ze zločinu, nemusím nic ukazovat", isA2Correct: false,
+                    fbRight: "Správně! Navíc, pokud ji u sebe nemáš (ani v aplikaci eDoklady), můžeš jít s nimi na stanici.", fbWrong: "Omyl. Prokazování totožnosti je tvá povinnost, pokud tě policista vyzve dle zákona."
+                }
+            ],
+            // SET 2
+            [
+                {
+                    q: "Vytvoříš přes Midjourney vizuály pro reklamní kampaň. Konkurence ti je ukradne. Můžeš se soudit?", a1: "Ano, mám k nim autorská práva", a2: "Ne, AI umění nelze chránit autorským právem", isA2Correct: true,
+                    fbRight: "Správně! Autorem může být jen člověk. Co vypadne z AI, patří všem.", fbWrong: "Bohužel ne. Vygenerovaný obrázek je z hlediska práva tzv. volné dílo."
+                },
+                {
+                    q: "Přijel jsi na koloběžce z párty. Policista ti dá fouknout, ty jsi v pohodě, takže odmítneš s tím, že spěcháš.", a1: "Nevadí, mám na to právo", a2: "Průšvih, bere se to jako nejvyšší trest", isA2Correct: true,
+                    fbRight: "Bohužel ano. Odmítnutí se automaticky trestá nejvyšší možnou sazbou pokuty a zákazem.", fbWrong: "Ne, odmítnutí dechové zkoušky je fatální chyba."
+                },
+                {
+                    q: "Tvoje 17letá ex na tebe podá trestní oznámení, protože jsi poslal kamarádům na Discord její nudes.", a1: "Je to šíření dětské pornografie", a2: "Je to jen přestupek (pomluva)", isA2Correct: false,
+                    fbRight: "Přesně. Jí nebylo 18 = dětské porno. I pouhé přeposlání je trestné.", fbWrong: "Omyl! Tohle je tvrdý trestný čin šíření dětské pornografie."
+                }
+            ],
+            // SET 3
+            [
+                {
+                    q: "Jako zaměstnanec omylem poškodíš služební auto v hodnotě milionu. Škodu jsi neudělal schválně.", a1: "Zaplatím maximálně 4,5 násobek svého platu", a2: "Zaplatím plnou cenu milionu Kč", isA2Correct: false,
+                    fbRight: "Správně. Toto je obrovská výhoda pracovní smlouvy oproti IČO.", fbWrong: "Ne, zákoník práce tě chrání limitem 4,5x tvé hrubé mzdy pro neúmyslnou škodu."
+                },
+                {
+                    q: "U výslechu na tebe policie tlačí, abys vysvětlil detail, který se stal večer. Co bys měl udělat?", a1: "Vymyslet si přijatelnou lež, abych měl klid", a2: "Slušně odepřít výpověď", isA2Correct: true,
+                    fbRight: "Přesně! Je to tvé Ústavní právo, ne drzost. Mlčeti zlato.", fbWrong: "Nejhorší co můžeš udělat. Zapleteš se do toho a obviní tě. Odepři výpověď."
+                },
+                {
+                    q: "Kámoš založí s.r.o. a poprosí tě v 18letech, ať mu děláš jednatele, že to nic není. Firma naseká dluhy.", a1: "Jako jednatel za dluhy v nejhořším ručím svým majetkem", a2: "Nic se mi nestane, firma ručí jen svým majetkem", isA2Correct: false,
+                    fbRight: "Správně! Jednatel má povinnost péče řádného hospodáře. Můžeš to odskákat.", fbWrong: "Obrovský omyl. Statutární orgán (jednatel) při porušení povinností ručí za dluhy osobně."
+                }
+            ],
+            // SET 4
+            [
+                {
+                    q: "Někdo mi na netu pod fotkou vyhrožuje: Vím, kde bydlíš, mrtvých se ptát nebudou. Nahlásím to.", a1: "Bude smetené jako běžná hádka z internetu", a2: "Jde o trestný čin nebezpečného vyhrožování", isA2Correct: true,
+                    fbRight: "Správně! Důvodná obava o život = trestný čin, často i s podmínkou.", fbWrong: "Omyl, jakmile hrozba obsahuje reálné rysy úmrtí, policie to musí řešit."
+                },
+                {
+                    q: "Použiju cizí AI model pro naklonování hlasu známého zpěváka do své úžasné reklamy na TikTok.", a1: "Může to být velký zásah do osobnostních práv zpěváka", a2: "Je to volné dílo, hlas si chráním autorským právem", isA2Correct: false,
+                    fbRight: "Správně. Ochrana osobnosti platí i proti deepfakes. Hrozí ti žaloba.", fbWrong: "Špatně! Zasahuješ do ochrany osobnosti, což tě může stát statisíce na náhradách."
+                },
+                {
+                    q: "Spolubydlící přestane platit za zničenou pračku v pronájmu na tvoje jméno. Co máš mít, abys to vymohl zpět?", a1: "Vůbec nic, stačí, že tam byl přihlášený", a2: "Písemnou podnájemní smlouvu k obraně", isA2Correct: true,
+                    fbRight: "Přesně tak, A4 podepsaná oběma stranami ti teď ušetří desetitisíce.", fbWrong: "Omyl! Bez papíru se neprokáže, kdo co dlužil. Musíš mít podnájemku."
+                }
+            ],
+            // SET 5
+            [
+                {
+                    q: "Jako programátor na živnost (Švarcsystém) děláš web a pokazíš migraci dat u banky. Kdo platí pokuty od klientů?", a1: "Firma (bance), ty pak firmě max do 4,5 násobku měsíční faktury", a2: "Banka to naúčtuje firmě a ta tobě plnou škodu.", isA2Correct: true,
+                    fbRight: "Správně. OSVČ ručí neomezeně. Tohle tě může zlikvidovat.", fbWrong: "Špatně. Zaměňuješ IČO se zaměstnáním. Jako OSVČ neseš plné riziko."
+                },
+                {
+                    q: "Sdílíš naštvaně na sociálních sítích intímní fotku expartnerky (jí je 20 let). Je to jen pomluva?", a1: "Ne, pravděpodobně půjde o trestný čin", a2: "Ano, dostanu maximálně nějakou malou pokutu", isA2Correct: false,
+                    fbRight: "Přesně. Trestný čin porušení tajemství listin a jiných dokumentů/poškození cizích práv.", fbWrong: "Omyl! Říká se tomu Revenge Porn a u soudů se to trestá velmi přísně."
+                },
+                {
+                    q: "Prokážeš se u policie apkou eDoklady. Pak ji ale chytíš za ruku a začneš natáčet z blízkosti obličeje.", a1: "Až 10 000 Kč bloková pokuta na místě", a2: "Mám právo ji natáčet, nesmí nic udělat", isA2Correct: false,
+                    fbRight: "Správně! Bránit policii v úkonu natáčením z 10 cm je přestupek proti pořádku.", fbWrong: "Máš právo točit, ale nesmíš bránit v činnosti nebo porušovat odstup."
+                }
+            ]
+        ];
+
+        let activeQuizSet = [];
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-questions-area');
+            container.innerHTML = '';
+
+            activeQuizSet.forEach((q, index) => {
+                const isHidden = index === 0 ? '' : 'hidden';
+                container.innerHTML += `
+                    <div class="quiz-step ${isHidden}" data-step="${index + 1}">
+                        <div class="text-xs font-bold text-yellow-500 mb-2">OTÁZKA ${index + 1}/3</div>
+                        <h3 class="text-xl font-bold text-white mb-6">${q.q}</h3>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(${index + 1}, ${!q.isA2Correct}, '${!q.isA2Correct ? q.fbRight : q.fbWrong}')" class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-${!q.isA2Correct ? 'yellow' : 'cyan'}-500 transition-colors">A) ${q.a1}</button>
+                            <button onclick="answerQuiz(${index + 1}, ${q.isA2Correct}, '${q.isA2Correct ? q.fbRight : q.fbWrong}')" class="w-full text-left p-4 bg-slate-900 border border-slate-700 rounded-lg hover:border-${q.isA2Correct ? 'yellow' : 'cyan'}-500 transition-colors">B) ${q.a2}</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         // Kvíz Logika
         function answerQuiz(step, isCorrect, feedback) {
             if (isCorrect) quizScore++;
@@ -691,7 +731,6 @@
                 if (window.confetti) confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
             } else {
                 feedbackIcon.innerHTML = '<i class="fas fa-times-circle text-red-500"></i>';
-                // Jemné zatřesení overlaye
                 feedbackOverlay.classList.add('animate-pulse');
                 setTimeout(() => feedbackOverlay.classList.remove('animate-pulse'), 500);
             }
@@ -725,7 +764,7 @@
                 icon.innerHTML = '👑';
                 title.innerText = 'Přežil jsi!';
                 title.classList.add('text-green-400');
-                desc.innerText = 'Gratulace. Exekuce, vězení ani ostuda na inetu ti zatím nehrozí.';
+                desc.innerText = 'Gratulace. Exekuce, vězení ani ostuda ti zatím nehrozí.';
                 if (window.confetti) {
                     var duration = 3 * 1000;
                     var end = Date.now() + duration;
@@ -739,12 +778,12 @@
                 icon.innerHTML = '😅';
                 title.innerText = 'Vyvázl jsi s podmínkou';
                 title.classList.add('text-yellow-400');
-                desc.innerText = 'Dvakrát to vyšlo, ale jednou ti exekutor sebral PlayStation. Dej si příště bacha.';
+                desc.innerText = 'Dvakrát dobrý, ale jednou tě obrali. Dej si příště rande s právníkem.';
             } else {
                 icon.innerHTML = '💀';
                 title.innerText = 'Game Over';
                 title.classList.add('text-red-500');
-                desc.innerText = 'Jsi v průšvihu. Ulož si radši hned ten kontakt do telefonu (QR v patičce).';
+                desc.innerText = 'Totálně jsi to projel. Ulož si ten kontakt do telefonu (QR v patičce), budeš ho potřebovat.';
             }
 
             resultBox.classList.remove('hidden');
@@ -753,37 +792,67 @@
         function resetQuiz() {
             quizScore = 0;
             currentQuizStep = 1;
+
+            // Randomize question set
+            const randomIndex = Math.floor(Math.random() * quizSets.length);
+            activeQuizSet = quizSets[randomIndex];
+            renderQuiz();
+
             document.getElementById('quiz-result').classList.add('hidden');
             document.getElementById('score-title').className = 'text-3xl font-bold mb-2'; // reset barev
-
-            document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.querySelector('.quiz-step[data-step="1"]').classList.remove('hidden');
         }
 
-        // Interaktivní odhalení (bez klávesy na mobilu!)
-        function revealVerdict(btn, isGuilty) {
-            const verdictBox = document.getElementById('interactive-verdict');
-            const verdictTitle = document.getElementById('secret-verdict');
-            const verdictDesc = document.getElementById('secret-explanation');
+        // Init prnví quiz při načtení
+        document.addEventListener('DOMContentLoaded', () => {
+            resetQuiz();
+        });
 
-            verdictBox.classList.remove('hidden', 'border-red-500/50', 'border-green-500/50');
+        // Interaktivní odhalení - Vrácení na Ctrl+X klávesnici (bez tlačítek)
+        let keysPressed = {};
+        document.addEventListener('keydown', function (event) {
+            keysPressed[event.key] = true;
 
-            if (isGuilty) {
-                verdictTitle.innerText = "SPRÁVNĚ! VINEN.";
-                verdictTitle.className = "font-extrabold text-xl tracking-widest block mb-2 text-green-400";
-                verdictDesc.innerText = "Nebezpečné vyhrožování (§ 353). Soud posílá pachatele do podmínky se záznamem v rejstříku trestů.";
-                verdictBox.classList.add('border-green-500/50', 'bg-green-900/20');
-                if (window.confetti) confetti({ particleCount: 30, spread: 40 });
-            } else {
-                verdictTitle.innerText = "ŠPATNĚ! JE TO TRESTŇÁK.";
-                verdictTitle.className = "font-extrabold text-xl tracking-widest block mb-2 text-red-500";
-                verdictDesc.innerText = "Věta \"Vím, do jakýho fitka chodíš\" to mění z pouhé nadávky na reálnou hrozbu zdraví.";
-                verdictBox.classList.add('border-red-500/50', 'bg-red-900/20');
+            if (keysPressed['Control'] && (keysPressed['x'] || keysPressed['X'])) {
+                event.preventDefault(); // Zabrátní cut operaci v prohlížeič
+
+                const verdictBox = document.getElementById('interactive-verdict');
+                const verdictTitle = document.getElementById('secret-verdict');
+                const verdictDesc = document.getElementById('secret-explanation');
+
+                if (verdictBox && verdictTitle) {
+                    if (verdictTitle.innerHTML.includes("???")) {
+                        // ODHALENÍ
+                        verdictBox.classList.remove('border-slate-700/50');
+                        verdictBox.classList.add('border-green-500/50', 'bg-green-900/20');
+
+                        verdictTitle.innerText = "SPRÁVNĚ! VINEN.";
+                        verdictTitle.className = "font-extrabold text-xl tracking-widest block mb-2 text-green-400 scale-110 transition-transform origin-center";
+                        setTimeout(() => verdictTitle.classList.remove("scale-110"), 300);
+
+                        verdictDesc.innerText = "Nebezpečné vyhrožování (§ 353). Je tam hrozba újmou na zdraví.";
+                        verdictDesc.classList.remove("text-slate-400");
+                        verdictDesc.classList.add("text-slate-200");
+
+                        if (window.confetti) confetti({ particleCount: 40, spread: 50 });
+                    } else {
+                        // SKRYTÍ
+                        verdictBox.classList.add('border-slate-700/50');
+                        verdictBox.classList.remove('border-green-500/50', 'bg-green-900/20');
+
+                        verdictTitle.innerText = "VERDIKT: ???";
+                        verdictTitle.className = "font-extrabold text-xl tracking-widest block mb-1 text-slate-500";
+
+                        verdictDesc.innerText = "Rozhodni ty! (Zkus zmáčknout Ctrl + X)";
+                        verdictDesc.classList.remove("text-slate-200");
+                        verdictDesc.classList.add("text-slate-400");
+                    }
+                }
             }
+        });
 
-            // Skryj tlačítka
-            btn.parentElement.classList.add('hidden');
-        }
+        document.addEventListener('keyup', (event) => {
+            delete keysPressed[event.key];
+        });
     </script>
 </body>
 
